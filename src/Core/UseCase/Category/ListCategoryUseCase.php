@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Package\Core\UseCase\Category;
 
-use Package\Core\Domain\Query\Category\PaginationCategoryQuery;
+use Package\Core\Domain\Query\Category\PaginationCategoryQueryInterface;
 use Package\Core\UseCase\Category\DTO\{CategoryPaginateOutput};
 use Package\Shared\Domain\Repository\DTO\OrderInput;
 use Package\Shared\Domain\Repository\Enum\Order;
@@ -12,7 +12,7 @@ use Package\Shared\Domain\Repository\Enum\Order;
 class ListCategoryUseCase
 {
     public function __construct(
-        protected PaginationCategoryQuery $paginationCategoryQuery,
+        protected PaginationCategoryQueryInterface $paginationCategoryQuery,
     ) {
     }
 

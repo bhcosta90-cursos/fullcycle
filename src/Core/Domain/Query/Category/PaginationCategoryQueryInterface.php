@@ -7,7 +7,7 @@ namespace Package\Core\Domain\Query\Category;
 use Package\Shared\Domain\Repository\DTO\OrderInput;
 use Package\Shared\Domain\Repository\PaginationInterface;
 
-interface PaginationCategoryQuery
+interface PaginationCategoryQueryInterface
 {
     public function handle(
         array      $filter,
