@@ -20,7 +20,7 @@ class CategoryValidator implements ValidatorInterface
         ]);
     }
 
-    private function convertEntityForArray(Entity $entity): array
+    protected function convertEntityForArray(Entity $entity): array
     {
         return [
             'name'        => $entity->name,

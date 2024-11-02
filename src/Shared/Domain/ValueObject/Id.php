@@ -24,7 +24,7 @@ class Id
         return $this->value;
     }
 
-    private function ensureIsValid(string $id): void
+    protected function ensureIsValid(string $id): void
     {
         if (!RamseyUuid::isValid($id)) {
             throw new \InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
