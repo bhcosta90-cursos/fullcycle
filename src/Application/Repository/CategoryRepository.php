@@ -7,6 +7,7 @@ namespace Package\Application\Repository;
 use App\Models\Category;
 use Package\Core\Domain\Entity\CategoryEntity;
 use Package\Core\Domain\Repository\CategoryRepositoryInterface;
+use Package\Core\UseCase\Category\Exception\CategoryNotFoundException;
 use Package\Shared\Domain\Entity\Entity;
 
 class CategoryRepository implements CategoryRepositoryInterface
@@ -29,7 +30,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function update(Entity $categoryEntity): CategoryEntity
     {
         $dbCategory = $this->getModel($categoryEntity->id());
-        $dbCategory?->update([
+
+        $dbCategory->update([
             'name'        => $categoryEntity->name,
             'description' => $categoryEntity->description,
             'is_active'   => $categoryEntity->isActive,
@@ -38,11 +40,9 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $this->toEntity($dbCategory);
     }
 
-    public function find(string $id): ?CategoryEntity
+    public function find(string $id): CategoryEntity
     {
-        return ($m = $this->getModel($id))
-            ? $this->toEntity($m)
-            : null;
+        return $this->toEntity($this->getModel($id));
     }
 
     public function delete(string $id): bool
@@ -50,13 +50,19 @@ class CategoryRepository implements CategoryRepositoryInterface
         return (bool) $this->getModel($id)?->delete();
     }
 
-    protected function getModel(string $id): ?Category
+    protected function getModel(string $id): Category
     {
-        return $this->category->find($id);
+        $response = $this->category->find($id);
+
+        if (blank($response)) {
+            throw new CategoryNotFoundException($id);
+        }
+
+        return $response;
     }
 
-    protected function toEntity(?object $data): CategoryEntity
+    protected function toEntity(object $data): ?CategoryEntity
     {
-        return CategoryEntity::make($data ? $data->toArray() : []);
+        return CategoryEntity::make($data->toArray());
     }
 }
