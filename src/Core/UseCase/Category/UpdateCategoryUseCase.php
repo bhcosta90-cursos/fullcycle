@@ -6,24 +6,34 @@ namespace Package\Core\UseCase\Category;
 
 use Package\Core\Domain\Entity\CategoryEntity;
 use Package\Core\Domain\Repository\CategoryRepository;
-use Package\Core\UseCase\Category\DTO\{CategoryOutput};
+use Package\Core\UseCase\Category\DTO\{CategoryOutput, CategoryUpdateInput};
 use Package\Core\UseCase\Category\Exception\CategoryNotFound;
 
-class ShowCategoryUseCase
+class UpdateCategoryUseCase
 {
     public function __construct(
         protected CategoryRepository $categoryRepository,
     ) {
     }
 
-    public function handle(string $id): CategoryOutput
+    public function handle(CategoryUpdateInput $input): CategoryOutput
     {
         /** @var CategoryEntity $entity */
-        $entity = $this->categoryRepository->find($id);
+        $entity = $this->categoryRepository->find($input->id);
 
         if ($entity === null) {
-            throw new CategoryNotFound($id);
+            throw new CategoryNotFound($input->id);
         }
+
+        $entity->update(name: $input->name, description: $input->description);
+
+        if ($input->is_active !== $entity->isActive) {
+            $input->is_active
+                ? $entity->enable()
+                : $entity->disable();
+        }
+
+        $this->categoryRepository->update($entity);
 
         return new CategoryOutput(
             id: $entity->id(),

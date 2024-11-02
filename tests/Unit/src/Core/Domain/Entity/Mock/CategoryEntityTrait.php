@@ -8,7 +8,7 @@ use Package\Core\Domain\Entity\CategoryEntity;
 
 trait CategoryEntityTrait
 {
-    public function makeCategoryEntity(array $data = [])
+    public function makeCategoryEntity(...$data)
     {
         $data += [
             'name' => 'Category Name',
