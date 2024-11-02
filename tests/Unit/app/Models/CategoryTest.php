@@ -14,6 +14,7 @@ it('returns the fillable attributes of the Category model', function () {
     // Assert
     expect($response)->toBe([
         'name',
+        'description',
         'is_active',
     ]);
 });

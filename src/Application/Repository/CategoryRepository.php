@@ -29,7 +29,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function update(Entity $categoryEntity): CategoryEntity
     {
         $dbCategory = $this->getModel($categoryEntity->id());
-        $dbCategory->update([
+        $dbCategory?->update([
             'name'        => $categoryEntity->name,
             'description' => $categoryEntity->description,
             'is_active'   => $categoryEntity->isActive,
@@ -40,7 +40,9 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function find(string $id): ?CategoryEntity
     {
-        return $this->toEntity($this->getModel($id));
+        return ($m = $this->getModel($id))
+            ? $this->toEntity($m)
+            : null;
     }
 
     public function delete(string $id): bool
@@ -48,13 +50,13 @@ class CategoryRepository implements CategoryRepositoryInterface
         return (bool) $this->getModel($id)?->delete();
     }
 
-    protected function getModel(string $id): Category
+    protected function getModel(string $id): ?Category
     {
         return $this->category->find($id);
     }
 
-    protected function toEntity(object $data): CategoryEntity
+    protected function toEntity(?object $data): CategoryEntity
     {
-        return CategoryEntity::make($data->toArray());
+        return CategoryEntity::make($data ? $data->toArray() : []);
     }
 }
