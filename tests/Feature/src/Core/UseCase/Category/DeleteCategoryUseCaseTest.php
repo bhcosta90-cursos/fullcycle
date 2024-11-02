@@ -8,7 +8,7 @@ use Package\Core\UseCase\Category\{DeleteCategoryUseCase};
 
 use function Pest\Laravel\{assertDatabaseCount, assertSoftDeleted};
 
-it('', function () {
+it('deletes a category and verifies it is soft deleted in the database', function () {
     // Arrange
     $category   = Category::factory()->create();
     $repository = new CategoryRepository(new Category());

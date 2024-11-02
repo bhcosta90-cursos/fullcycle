@@ -9,7 +9,7 @@ use Package\Core\UseCase\Category\DTO\CategoryCreateInput;
 
 use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas};
 
-it('', function () {
+it('creates a category and verifies it in the database', function () {
     // Arrange
     $repository = new CategoryRepository(new Category());
     $useCase    = new CreateCategoryUseCase(categoryRepository: $repository);
