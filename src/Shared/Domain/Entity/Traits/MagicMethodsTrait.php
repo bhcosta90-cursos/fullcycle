@@ -33,11 +33,11 @@ trait MagicMethodsTrait
 
     public function id(): string
     {
-        return (string) $this->id;
+        return (string) ($this->id ?: Id::random());
     }
 
     public function createdAt(): string
     {
-        return $this->createdAt->format('Y-m-d H:i:s');
+        return $this->createdAt?->format('Y-m-d H:i:s') ?: (new \DateTime())->format('Y-m-d H:i:s');
     }
 }
