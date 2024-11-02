@@ -19,8 +19,7 @@ class CreateCategoryUseCase
     {
         $entity = new CategoryEntity(
             name: $categoryInput->name,
-            description: $categoryInput->description,
-            isActive: $categoryInput->is_active,
+            description: $categoryInput->description
         );
 
         /** @var CategoryEntity $newEntity */

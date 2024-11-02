@@ -8,7 +8,7 @@ use Package\Core\Domain\Entity\CategoryEntity;
 
 use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas, assertSoftDeleted};
 
-beforeEach(fn () => $this->categoryRepository = app(CategoryRepository::class));
+beforeEach(fn () => $this->categoryRepository = new CategoryRepository(new Category()));
 
 it('creates a category and verifies it in the database', function () {
     // Arrange
