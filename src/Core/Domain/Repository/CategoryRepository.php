@@ -11,4 +11,6 @@ interface CategoryRepository
     public function create(CategoryEntity $categoryEntity): CategoryEntity;
 
     public function update(CategoryEntity $categoryEntity): CategoryEntity;
+
+    public function find(string $id): ?CategoryEntity;
 }
