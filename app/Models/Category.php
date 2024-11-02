@@ -25,4 +25,15 @@ class Category extends Model
             'is_active' => 'boolean',
         ];
     }
+
+    public function scopeLike($query, string | array $column, ?string $value = null): void
+    {
+        if (is_string($column)) {
+            $column = [$column];
+        }
+
+        if (filled($value)) {
+            $query->whereAny($column, 'like', "$value%");
+        }
+    }
 }
