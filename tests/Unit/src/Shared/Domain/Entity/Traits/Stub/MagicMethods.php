@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Tests\Unit\Shared\Domain\Entity\Traits\Stub;
+namespace Tests\Unit\src\Shared\Domain\Entity\Traits\Stub;
 
 use Package\Shared\Domain\Entity\{Entity, Traits\MagicMethodsTrait};
 

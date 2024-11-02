@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 use Package\Shared\Domain\ValueObject\Id;
-use Tests\Unit\Shared\Domain\Entity\Traits\Stub\MagicMethods;
+use Tests\Unit\src\Shared\Domain\Entity\Traits\Stub\MagicMethods;
 
 it('generates a random id if not set', function () {
     $entity = new MagicMethods();

@@ -3,8 +3,8 @@
 declare(strict_types = 1);
 
 use Package\Shared\Domain\ValueObject\Id;
-use Tests\Unit\Shared\Domain\Entity\Stub\Entity;
-use Tests\Unit\Shared\Domain\Entity\Stub\{EntityFillable};
+use Tests\Unit\src\Shared\Domain\Entity\Stub\Entity;
+use Tests\Unit\src\Shared\Domain\Entity\Stub\{EntityFillable};
 
 it('creates an entity with the correct id', function () {
     $id     = Id::random();

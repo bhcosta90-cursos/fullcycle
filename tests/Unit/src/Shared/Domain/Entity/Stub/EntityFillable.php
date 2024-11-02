@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Tests\Unit\Shared\Domain\Entity\Stub;
+namespace Tests\Unit\src\Shared\Domain\Entity\Stub;
 
 class EntityFillable extends Entity
 {
