@@ -5,14 +5,14 @@ declare(strict_types = 1);
 namespace Package\Core\UseCase\Category;
 
 use Package\Core\Domain\Entity\CategoryEntity;
-use Package\Core\Domain\Repository\CategoryRepository;
+use Package\Core\Domain\Repository\CategoryRepositoryInterface;
 use Package\Core\UseCase\Category\DTO\{CategoryOutput};
 use Package\Core\UseCase\Category\Exception\CategoryNotFoundException;
 
 class ShowCategoryUseCase
 {
     public function __construct(
-        protected CategoryRepository $categoryRepository,
+        protected CategoryRepositoryInterface $categoryRepository,
     ) {
     }
 

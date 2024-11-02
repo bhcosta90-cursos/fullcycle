@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use Package\Core\Domain\Repository\CategoryRepository;
+use Package\Core\Domain\Repository\CategoryRepositoryInterface;
 use Package\Core\UseCase\Category\DTO\{CategoryOutput, CategoryUpdateInput};
 use Package\Core\UseCase\Category\{UpdateCategoryUseCase};
 use Package\Shared\Domain\Exception\EntityNotFoundException;
@@ -12,7 +12,7 @@ uses(CategoryEntityTrait::class);
 
 it('update a category and returns a CategoryOutput', function () {
     // Arrange
-    $repository = Mockery::mock(CategoryRepository::class);
+    $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('find')->once()->andReturn($entity = $this->makeCategoryEntity());
     $repository->shouldReceive('update')->once()->andReturn($entity);
     $input = Mockery::mock(CategoryUpdateInput::class, ['1', 'testing', 'testing', true]);
@@ -26,7 +26,7 @@ it('update a category and returns a CategoryOutput', function () {
 
 it('disabled a category and returns a CategoryOutput', function () {
     // Arrange
-    $repository = Mockery::mock(CategoryRepository::class);
+    $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('find')->once()->andReturn($entity = $this->makeCategoryEntity());
     $repository->shouldReceive('update')->once()->andReturn($entity);
     $input = Mockery::mock(CategoryUpdateInput::class, ['1', 'testing', 'testing', false]);
@@ -40,7 +40,7 @@ it('disabled a category and returns a CategoryOutput', function () {
 
 it('enable a category and returns a CategoryOutput', function () {
     // Arrange
-    $repository = Mockery::mock(CategoryRepository::class);
+    $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('find')->once()->andReturn($entity = $this->makeCategoryEntity(isActive: false));
     $repository->shouldReceive('update')->once()->andReturn($entity);
     $input = Mockery::mock(CategoryUpdateInput::class, ['1', 'testing', 'testing', true]);
@@ -54,7 +54,7 @@ it('enable a category and returns a CategoryOutput', function () {
 
 it('throws EntityNotFoundException when category is not found', function () {
     // Arrange
-    $repository = Mockery::mock(CategoryRepository::class);
+    $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('find')->once()->andReturn(null);
 
     // Act

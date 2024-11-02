@@ -6,6 +6,6 @@ namespace Package\Core\Domain\Repository;
 
 use Package\Shared\Domain\Repository\EntityInterface;
 
-interface CategoryRepository extends EntityInterface
+interface CategoryRepositoryInterface extends EntityInterface
 {
 }
