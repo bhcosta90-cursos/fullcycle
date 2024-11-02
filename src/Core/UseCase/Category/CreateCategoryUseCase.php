@@ -23,6 +23,7 @@ class CreateCategoryUseCase
             isActive: $categoryInput->is_active,
         );
 
+        /** @var CategoryEntity $newEntity */
         $newEntity = $this->categoryRepository->create($entity);
 
         return new CategoryOutput(
