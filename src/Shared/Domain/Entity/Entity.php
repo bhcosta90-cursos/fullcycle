@@ -58,12 +58,12 @@ abstract class Entity
         $this->validate();
     }
 
-    private static function transformString(string $input): string
+    protected static function transformString(string $input): string
     {
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
     }
 
-    private static function transformKeys(array $data): array
+    protected static function transformKeys(array $data): array
     {
         foreach ($data as $key => $value) {
 
