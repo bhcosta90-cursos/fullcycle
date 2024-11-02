@@ -12,7 +12,15 @@ it('returns zero total items when no categories are present', function () {
     $response = (new PaginationCategoryQuery())->handle([]);
 
     // Assert
-    expect($response)->total()->toBe(0);
+    expect($response)
+        ->total()->toBe(0)
+        ->perPage()->toBe(10)
+        ->firstPage()->toBe(0)
+        ->lastPage()->toBe(1)
+        ->currentPage()->toBe(1)
+        ->items()->toHaveCount(0)
+        ->to()->toBe(0)
+        ->from()->toBe(0);
 });
 
 it('returns total items and paginated items count when categories are present', function () {
@@ -23,8 +31,34 @@ it('returns total items and paginated items count when categories are present', 
     $response = (new PaginationCategoryQuery())->handle([], totalItens: 15);
 
     // Assert
-    expect($response)->total()->toBe(20)
-        ->items()->toHaveCount(15);
+    expect($response)
+        ->total()->toBe(20)
+        ->perPage()->toBe(15)
+        ->firstPage()->toBe(1)
+        ->lastPage()->toBe(2)
+        ->currentPage()->toBe(1)
+        ->items()->toHaveCount(15)
+        ->to()->toBe(1)
+        ->from()->toBe(15);
+});
+
+it('a', function () {
+    // Arrange
+    Category::factory(20)->create();
+
+    // Act
+    $response = (new PaginationCategoryQuery())->handle([], page: 2, totalItens: 15);
+
+    // Assert
+    expect($response)
+        ->total()->toBe(20)
+        ->perPage()->toBe(15)
+        ->firstPage()->toBe(16)
+        ->lastPage()->toBe(2)
+        ->currentPage()->toBe(2)
+        ->items()->toHaveCount(5)
+        ->to()->toBe(16)
+        ->from()->toBe(20);
 });
 
 it('returns total items and filtered items count when categories match the filter', function () {

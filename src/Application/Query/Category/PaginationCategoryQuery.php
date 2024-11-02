@@ -12,11 +12,11 @@ use Package\Shared\Domain\Repository\PaginationInterface;
 
 class PaginationCategoryQuery implements PaginationCategoryQueryInterface
 {
-    public function handle(array $filter, OrderInput $order = null, int $totalItens = 10): PaginationInterface
+    public function handle(array $filter, OrderInput $order = null, int $page = 1, int $totalItens = 10): PaginationInterface
     {
         return new PaginationPresenter(Category::query()
             ->like('name', $filter['name'] ?? '')
             ->orderBy($order?->field ?: 'name', $order?->direction->value ?: 'asc')
-            ->paginate(perPage: $totalItens));
+            ->paginate(perPage: $totalItens, page: $page));
     }
 }

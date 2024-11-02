@@ -12,6 +12,7 @@ interface PaginationCategoryQueryInterface
     public function handle(
         array      $filter,
         OrderInput $order = null,
+        int        $page = 1,
         int        $totalItens = 10,
     ): PaginationInterface;
 }
