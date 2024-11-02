@@ -4,10 +4,12 @@ declare(strict_types = 1);
 
 namespace Package\Shared\Domain\Repository;
 
+use stdClass;
+
 interface PaginationInterface
 {
     /**
-     * @return \stdClass[]
+     * @return stdClass[]
      */
     public function items(): array;
 

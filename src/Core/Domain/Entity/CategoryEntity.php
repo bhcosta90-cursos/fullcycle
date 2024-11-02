@@ -10,15 +10,15 @@ use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class CategoryEntity extends Entity
 {
+    protected array $fillable = ['name', 'description'];
+
     public function __construct(
-        protected string $name,
+        protected string  $name,
         protected ?string $description = null,
-        protected bool $isActive = true,
+        protected bool    $isActive = true,
     ) {
         $this->validate();
     }
-
-    protected array $fillable = ['name', 'description'];
 
     public function enable(): void
     {

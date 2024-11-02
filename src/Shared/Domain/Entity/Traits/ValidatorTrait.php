@@ -4,14 +4,15 @@ declare(strict_types = 1);
 
 namespace Package\Shared\Domain\Entity\Traits;
 
+use Closure;
 use Package\Shared\Domain\Notification\{Notification, NotificationException};
 use Package\Shared\Domain\Validation\ValidatorInterface;
 
 trait ValidatorTrait
 {
-    protected ?Notification $notification = null;
+    protected static ?Closure $validatorFactory = null;
 
-    protected static ?\Closure $validatorFactory = null;
+    protected ?Notification $notification = null;
 
     public static function setValidatorFactory(?callable $factory): void
     {
@@ -28,12 +29,14 @@ trait ValidatorTrait
             throw new NotificationException(
                 $this->notification()->messages(
                     $this->getValidator()
-                    ? get_class($this->getValidator())
-                    : null
+                        ? get_class($this->getValidator())
+                        : null
                 )
             );
         }
     }
+
+    abstract protected function getValidator(): ?ValidatorInterface;
 
     public function notification(): Notification
     {
@@ -43,6 +46,4 @@ trait ValidatorTrait
 
         return $this->notification;
     }
-
-    abstract protected function getValidator(): ?ValidatorInterface;
 }

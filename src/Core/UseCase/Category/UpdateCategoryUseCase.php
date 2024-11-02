@@ -7,7 +7,7 @@ namespace Package\Core\UseCase\Category;
 use Package\Core\Domain\Entity\CategoryEntity;
 use Package\Core\Domain\Repository\CategoryRepository;
 use Package\Core\UseCase\Category\DTO\{CategoryOutput, CategoryUpdateInput};
-use Package\Core\UseCase\Category\Exception\CategoryNotFound;
+use Package\Core\UseCase\Category\Exception\CategoryNotFoundException;
 
 class UpdateCategoryUseCase
 {
@@ -22,7 +22,7 @@ class UpdateCategoryUseCase
         $entity = $this->categoryRepository->find($input->id);
 
         if ($entity === null) {
-            throw new CategoryNotFound($input->id);
+            throw new CategoryNotFoundException($input->id);
         }
 
         $entity->update(name: $input->name, description: $input->description);

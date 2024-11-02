@@ -10,7 +10,7 @@ class OrderInput
 {
     public function __construct(
         public string $field,
-        public Order $direction,
+        public Order  $direction,
     ) {
     }
 }

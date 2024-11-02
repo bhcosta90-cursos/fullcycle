@@ -10,8 +10,8 @@ use Package\Shared\Domain\Repository\PaginationInterface;
 interface PaginationCategoryQuery
 {
     public function handle(
-        array $filter,
+        array      $filter,
         OrderInput $order = null,
-        int $totalItens = 10,
+        int        $totalItens = 10,
     ): PaginationInterface;
 }

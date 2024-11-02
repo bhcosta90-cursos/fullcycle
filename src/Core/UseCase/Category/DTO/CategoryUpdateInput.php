@@ -7,10 +7,10 @@ namespace Package\Core\UseCase\Category\DTO;
 class CategoryUpdateInput
 {
     public function __construct(
-        public string $id,
-        public string $name,
+        public string  $id,
+        public string  $name,
         public ?string $description,
-        public bool $is_active,
+        public bool    $is_active,
     ) {
         //
     }

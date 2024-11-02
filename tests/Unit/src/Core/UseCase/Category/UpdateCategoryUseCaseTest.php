@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use Package\Core\Domain\Repository\CategoryRepository;
 use Package\Core\UseCase\Category\DTO\{CategoryOutput, CategoryUpdateInput};
 use Package\Core\UseCase\Category\{UpdateCategoryUseCase};
-use Package\Shared\Domain\Exception\EntityNotFound;
+use Package\Shared\Domain\Exception\EntityNotFoundException;
 use Tests\Unit\src\Core\Domain\Entity\Mock\CategoryEntityTrait;
 
 uses(CategoryEntityTrait::class);
@@ -52,7 +52,7 @@ it('enable a category and returns a CategoryOutput', function () {
     expect($response)->toBeInstanceOf(CategoryOutput::class);
 });
 
-it('throws EntityNotFound when category is not found', function () {
+it('throws EntityNotFoundException when category is not found', function () {
     // Arrange
     $repository = Mockery::mock(CategoryRepository::class);
     $repository->shouldReceive('find')->once()->andReturn(null);
@@ -64,5 +64,5 @@ it('throws EntityNotFound when category is not found', function () {
         description: 'testing',
         is_active: true,
     )))
-        ->toThrow(EntityNotFound::class);
+        ->toThrow(EntityNotFoundException::class);
 });

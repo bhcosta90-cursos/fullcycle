@@ -7,7 +7,7 @@ namespace Package\Core\UseCase\Category;
 use Package\Core\Domain\Entity\CategoryEntity;
 use Package\Core\Domain\Repository\CategoryRepository;
 use Package\Core\UseCase\Category\DTO\{CategoryOutput};
-use Package\Core\UseCase\Category\Exception\CategoryNotFound;
+use Package\Core\UseCase\Category\Exception\CategoryNotFoundException;
 
 class ShowCategoryUseCase
 {
@@ -22,7 +22,7 @@ class ShowCategoryUseCase
         $entity = $this->categoryRepository->find($id);
 
         if ($entity === null) {
-            throw new CategoryNotFound($id);
+            throw new CategoryNotFoundException($id);
         }
 
         return new CategoryOutput(

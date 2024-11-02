@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Package\Shared\Domain\Entity;
 
+use DateTime;
 use Package\Shared\Domain\Entity\Traits\{MagicMethodsTrait, ValidatorTrait};
 use Package\Shared\Domain\ValueObject\Id;
 
@@ -31,10 +32,35 @@ abstract class Entity
         }
 
         if ($createdAt) {
-            $newEntity->createdAt = $createdAt instanceof \DateTime ? $createdAt : new \DateTime($createdAt);
+            $newEntity->createdAt = $createdAt instanceof DateTime ? $createdAt : new DateTime($createdAt);
         }
 
         return $newEntity;
+    }
+
+    protected static function transformKeys(array $data): array
+    {
+        foreach ($data as $key => $value) {
+
+            if (!property_exists(static::class, $key)) {
+                $keyCamelCase = self::transformString($key);
+
+                unset($data[$key]);
+
+                if (!property_exists(static::class, $keyCamelCase)) {
+                    continue;
+                }
+
+                $data[$keyCamelCase] = $value;
+            }
+        }
+
+        return $data;
+    }
+
+    protected static function transformString(string $input): string
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
     }
 
     public function update(...$data): void
@@ -56,30 +82,5 @@ abstract class Entity
         }
 
         $this->validate();
-    }
-
-    protected static function transformString(string $input): string
-    {
-        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
-    }
-
-    protected static function transformKeys(array $data): array
-    {
-        foreach ($data as $key => $value) {
-
-            if (!property_exists(static::class, $key)) {
-                $keyCamelCase = self::transformString($key);
-
-                unset($data[$key]);
-
-                if (!property_exists(static::class, $keyCamelCase)) {
-                    continue;
-                }
-
-                $data[$keyCamelCase] = $value;
-            }
-        }
-
-        return $data;
     }
 }

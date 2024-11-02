@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Package\Shared\Domain\Exception;
 
-class EntityValidationException extends \Exception
+use Exception;
+
+class EntityValidationException extends Exception
 {
 }
