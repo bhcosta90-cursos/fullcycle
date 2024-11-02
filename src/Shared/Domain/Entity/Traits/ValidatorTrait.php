@@ -22,10 +22,6 @@ trait ValidatorTrait
     {
         $validator = self::$validatorFactory ? (self::$validatorFactory)() : $this->getValidator();
 
-        if ($validator === null) {
-            return;
-        }
-
         $validator->validate($this);
 
         if ($this->notification()->hasErrors()) {
