@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 use Package\Core\Domain\Repository\CategoryRepository;
 use Package\Core\UseCase\Category\CreateCategoryUseCase;
-use Package\Core\UseCase\Category\DTO\{CategoryOutput, CategoryCreateInput};
+use Package\Core\UseCase\Category\DTO\{CategoryCreateInput, CategoryOutput};
 use Tests\Unit\src\Core\Domain\Entity\Mock\CategoryEntityTrait;
 
 uses(CategoryEntityTrait::class);
