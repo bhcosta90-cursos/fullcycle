@@ -9,7 +9,7 @@ use Package\Core\UseCase\Category\ListCategoryUseCase;
 it('lists categories and verifies the total count in the database', function () {
     // Arrange
     Category::factory(5)->create();
-    $repository = new PaginationCategoryQuery();
+    $repository = new PaginationCategoryQuery(new Category());
     $useCase    = new ListCategoryUseCase(paginationCategoryQuery: $repository);
 
     // Act

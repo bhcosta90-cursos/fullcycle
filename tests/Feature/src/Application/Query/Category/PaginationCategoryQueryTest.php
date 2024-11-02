@@ -7,9 +7,14 @@ use Package\Application\Query\Category\PaginationCategoryQuery;
 use Package\Shared\Domain\Repository\DTO\OrderInput;
 use Package\Shared\Domain\Repository\Enum\Order;
 
+beforeEach(function () {
+    $this->category = new Category();
+    $this->useCase  = new PaginationCategoryQuery($this->category);
+});
+
 it('returns zero total items when no categories are present', function () {
     // Act
-    $response = (new PaginationCategoryQuery())->handle([]);
+    $response = $this->useCase->handle([]);
 
     // Assert
     expect($response)
@@ -28,7 +33,7 @@ it('returns total items and paginated items count when categories are present', 
     Category::factory(20)->create();
 
     // Act
-    $response = (new PaginationCategoryQuery())->handle([], totalItens: 15);
+    $response = $this->useCase->handle([], totalItens: 15);
 
     // Assert
     expect($response)
@@ -47,7 +52,7 @@ it('a', function () {
     Category::factory(20)->create();
 
     // Act
-    $response = (new PaginationCategoryQuery())->handle([], page: 2, totalItens: 15);
+    $response = $this->useCase->handle([], page: 2, totalItens: 15);
 
     // Assert
     expect($response)
@@ -70,7 +75,7 @@ it('returns total items and filtered items count when categories match the filte
         ->create();
 
     // Act
-    $response = (new PaginationCategoryQuery())->handle(['name' => 'Category 1']);
+    $response = $this->useCase->handle(['name' => 'Category 1']);
 
     // Assert
     expect($response)->total()->toBe(1)
@@ -82,13 +87,13 @@ it('returns items in the correct order and handles descending order', function (
     Category::factory(2)->sequence(['name' => 'b'], ['name' => 'a'])->create();
 
     // Act
-    $response = (new PaginationCategoryQuery())->handle([]);
+    $response = $this->useCase->handle([]);
 
     // Assert
     expect($response->items()[0])->name->toBe('a');
 
     // Act
-    $response = (new PaginationCategoryQuery())->handle([], new OrderInput('name', Order::DESC));
+    $response = $this->useCase->handle([], new OrderInput('name', Order::DESC));
 
     // Assert
     expect($response->items()[0])->name->toBe('b');
