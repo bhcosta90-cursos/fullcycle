@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Package\Core\Domain\Validator;
 
+use Package\Core\Domain\Validate\LaravelValidate;
 use Package\Shared\Domain\Entity\Entity;
-use Package\Shared\Domain\Validate\LaravelValidate;
 use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class CategoryValidator implements ValidatorInterface

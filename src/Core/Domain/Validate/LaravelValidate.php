@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Package\Shared\Domain\Validate;
+namespace Package\Core\Domain\Validate;
 
 use Illuminate\Support\Facades\Validator;
 use Package\Shared\Domain\Entity\Entity;
