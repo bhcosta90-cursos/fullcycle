@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Package\Core\Domain\Validator;
 
-use Illuminate\Support\Facades\Validator;
 use Package\Shared\Domain\Entity\Entity;
+use Package\Shared\Domain\Validate\LaravelValidate;
 use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class CategoryValidator implements ValidatorInterface
@@ -14,20 +14,10 @@ class CategoryValidator implements ValidatorInterface
     {
         $data = $this->convertEntityForArray($entity);
 
-        $validator = Validator::make($data, [
+        LaravelValidate::make($entity, $data, [
             'name'        => 'required|min:3|max:100',
             'description' => 'nullable|max:255',
         ]);
-
-        if ($validator->fails()) {
-
-            foreach ($validator->errors()->messages() as $error) {
-                $entity->notification()->addError([
-                    'context' => get_class($entity),
-                    'message' => $error[0],
-                ]);
-            }
-        }
     }
 
     private function convertEntityForArray(Entity $entity): array
