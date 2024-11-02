@@ -54,7 +54,3 @@ function validationException($class, array $data, array $default): void
             ->toThrow(Package\Shared\Domain\Notification\NotificationException::class);
     }
 }
-
-beforeEach(function () {
-    dump(123);
-})->group('unit');
