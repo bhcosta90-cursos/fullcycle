@@ -13,4 +13,6 @@ interface EntityInterface
     public function update(Entity $categoryEntity): Entity;
 
     public function find(string $id): ?Entity;
+
+    public function delete(string $id): bool;
 }
