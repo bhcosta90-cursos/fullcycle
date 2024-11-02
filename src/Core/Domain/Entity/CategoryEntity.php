@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Package\Core\Domain\Entity;
 
+use Package\Core\Domain\Factory\CategoryValidatorFactory;
 use Package\Shared\Domain\Entity\Entity;
-use Package\Shared\Domain\Validation\DomainValidation;
 
 class CategoryEntity extends Entity
 {
@@ -31,8 +31,6 @@ class CategoryEntity extends Entity
 
     protected function validate(): void
     {
-        DomainValidation::strMinLength($this->name);
-        DomainValidation::strMaxLength($this->name);
-        DomainValidation::strCanNullAndMaxLength($this->description);
+        CategoryValidatorFactory::create()->validate($this);
     }
 }
