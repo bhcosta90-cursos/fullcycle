@@ -15,7 +15,6 @@ beforeEach(function () {
 
 it('can create a entity with default values', function () {
 
-    // Arrange
     $category = new CategoryEntity(name: 'category');
 
     // Act & Assert
@@ -31,7 +30,6 @@ it('can create a entity with default values', function () {
 });
 
 it('can create a entity with all values', function () {
-    // Arrange
     $category = CategoryEntity::make(
         name: 'category',
         description: 'description',
@@ -63,23 +61,17 @@ it('update fields of entity', function () {
 });
 
 it('can disable the entity', function () {
-    // Arrange
     $category = new CategoryEntity(name: 'category');
 
-    // Act
     $category->disable();
 
-    // Assert
     expect($category->isActive)->toBeFalse();
 });
 
 it('can enable the entity', function () {
-    // Arrange
     $category = new CategoryEntity(name: 'category', isActive: false);
 
-    // Act
     $category->enable();
 
-    // Assert
     expect($category->isActive)->toBeTrue();
 });

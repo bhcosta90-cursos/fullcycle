@@ -5,7 +5,6 @@ declare(strict_types = 1);
 use Package\Core\Domain\Entity\CategoryEntity;
 
 it('throws an exception for invalid fields', function () {
-    // Arrange
     $data = [
         [
             'name' => 'de',

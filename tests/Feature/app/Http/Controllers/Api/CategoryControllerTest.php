@@ -14,15 +14,12 @@ beforeEach(function () {
     $this->paginateRepository = new PaginationCategoryQuery($this->category);
 });
 
-it('', function () {
-    // Arrange
+it('returns a paginated list of categories with meta information', function () {
     $useCase    = new ListCategoryUseCase($this->paginateRepository);
     $controller = new CategoryController();
 
-    // Act
     $response = $controller->index(new Request(), $useCase);
 
-    // Assert
     expect($response)->toBeInstanceOf(AnonymousResourceCollection::class)
         ->and($response->additional)->toHaveKey('meta')
         ->and($response->additional['meta'])->toHaveKeys([
@@ -34,4 +31,8 @@ it('', function () {
             'to',
             'first_page',
         ]);
+});
+
+it('a', function () {
+
 });

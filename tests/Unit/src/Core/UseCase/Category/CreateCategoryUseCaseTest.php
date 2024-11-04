@@ -10,14 +10,11 @@ use Tests\Unit\src\Core\Domain\Entity\Mock\CategoryEntityTrait;
 uses(CategoryEntityTrait::class);
 
 it('creates a category and returns a CategoryOutput', function () {
-    // Arrange
     $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('create')->once()->andReturn($this->makeCategoryEntity());
     $input = Mockery::mock(CategoryCreateInput::class, ['test', 'test', true]);
 
-    // Act
     $response = (new CreateCategoryUseCase(categoryRepository: $repository))->handle($input);
 
-    // Assert
     expect($response)->toBeInstanceOf(CategoryOutput::class);
 });

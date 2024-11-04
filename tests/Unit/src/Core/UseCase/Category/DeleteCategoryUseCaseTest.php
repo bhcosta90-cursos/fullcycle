@@ -9,19 +9,15 @@ use Tests\Unit\src\Core\Domain\Entity\Mock\CategoryEntityTrait;
 uses(CategoryEntityTrait::class);
 
 it('deletes a category and returns true', function () {
-    // Arrange
     $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('delete')->once()->andReturn(true);
 
-    // Act
     $response = (new DeleteCategoryUseCase(categoryRepository: $repository))->handle('testing');
 
-    // Assert
     expect($response)->toBeTrue();
 });
 
 it('throws CategoryDeleteException when category deletion fails', function () {
-    // Arrange
     $repository = Mockery::mock(CategoryRepositoryInterface::class);
     $repository->shouldReceive('delete')->once()->andReturn(false);
 

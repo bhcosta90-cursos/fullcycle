@@ -10,13 +10,10 @@ use Tests\Unit\src\Shared\Domain\Repository\PaginationInterfaceTrait;
 uses(PaginationInterfaceTrait::class);
 
 it('returns a CategoryPaginateOutput when listing categories', function () {
-    // Arrange
     $repository = Mockery::mock(PaginationCategoryQueryInterface::class);
     $repository->shouldReceive('handle')->once()->andReturn($this->mockPagination());
 
-    // Act
     $response = (new ListCategoryUseCase(paginationCategoryQuery: $repository))->handle();
 
-    // Assert
     expect($response)->toBeInstanceOf(CategoryPaginateOutput::class);
 });
