@@ -4,12 +4,13 @@ declare(strict_types = 1);
 
 namespace Package\Shared\Domain\Entity;
 
-use Package\Shared\Domain\Entity\Traits\MagicMethodsTrait;
+use Package\Shared\Domain\Entity\Traits\{MagicMethodsTrait, ValidatorTrait};
 use Package\Shared\Domain\ValueObject\Id;
 
 abstract class Entity
 {
     use MagicMethodsTrait;
+    use ValidatorTrait;
 
     public static function make(...$data): self
     {
@@ -55,11 +56,6 @@ abstract class Entity
         }
 
         $this->validate();
-    }
-
-    protected function validate(): void
-    {
-
     }
 
     private static function transformString(string $input): string

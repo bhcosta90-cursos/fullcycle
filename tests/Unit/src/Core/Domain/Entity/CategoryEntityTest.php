@@ -3,8 +3,15 @@
 declare(strict_types = 1);
 
 use Package\Core\Domain\Entity\CategoryEntity;
-use Package\Shared\Domain\Exception\EntityValidationException;
+use Package\Shared\Domain\Entity\Entity;
+use Package\Shared\Domain\Validation\ValidatorInterface;
 use Package\Shared\Domain\ValueObject\Id;
+
+beforeEach(function () {
+    $mock = Mockery::mock(ValidatorInterface::class);
+    $mock->shouldReceive('validate')->andReturn([]);
+    Entity::setValidatorFactory(fn () => $mock);
+});
 
 it('can create a entity with default values', function () {
 
@@ -53,27 +60,6 @@ it('update fields of entity', function () {
         ->name->toBe('new category')
         ->description->toBe('new description')
         ->isActive->toBeTrue();
-});
-
-it('throws an exception for invalid fields', function () {
-    // Arrange
-    $data = [
-        [
-            'name' => 'de',
-        ],
-        [
-            'name' => str_repeat('a', 256),
-        ],
-        [
-            'description' => str_repeat('a', 256),
-        ],
-    ];
-
-    // Act & Assert
-    foreach ($data as $rs) {
-        expect(fn () => new CategoryEntity(name: $rs['name'] ?? 'name', description: $rs['description'] ?? null))
-            ->toThrow(EntityValidationException::class);
-    }
 });
 
 it('can disable the entity', function () {

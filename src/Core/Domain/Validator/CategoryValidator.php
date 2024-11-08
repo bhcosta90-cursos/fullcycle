@@ -15,13 +15,15 @@ class CategoryValidator implements ValidatorInterface
         $data = $this->convertEntityForArray($entity);
 
         $validator = Validator::make($data, [
-            'name' => 'required|min:3|max:100',
+            'name'        => 'required|min:3|max:100',
+            'description' => 'nullable|max:255',
         ]);
 
         if ($validator->fails()) {
+
             foreach ($validator->errors()->messages() as $error) {
-                $entity->notification->addError([
-                    'context' => 'video',
+                $entity->notification()->addError([
+                    'context' => get_class($entity),
                     'message' => $error[0],
                 ]);
             }
@@ -31,7 +33,8 @@ class CategoryValidator implements ValidatorInterface
     private function convertEntityForArray(Entity $entity): array
     {
         return [
-            'name' => $entity->name,
+            'name'        => $entity->name,
+            'description' => $entity->description,
         ];
     }
 }
