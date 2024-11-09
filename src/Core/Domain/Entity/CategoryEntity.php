@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Package\Core\Domain\Entity;
 
-use Package\Core\Domain\Factory\CategoryValidatorFactory;
+use Package\Application\Validation\Factory\CategoryValidatorFactory;
 use Package\Shared\Domain\Entity\Entity;
 use Package\Shared\Domain\Validation\ValidatorInterface;
 

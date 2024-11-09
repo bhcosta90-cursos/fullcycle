@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Package\Core\Domain\Factory;
+namespace Package\Application\Validation\Factory;
 
-use Package\Core\Domain\Validator\CategoryValidator;
+use Package\Application\Validation\Validate\CategoryValidator;
 use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class CategoryValidatorFactory

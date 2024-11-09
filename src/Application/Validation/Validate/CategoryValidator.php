@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Package\Core\Domain\Validator;
+namespace Package\Application\Validation\Validate;
 
-use Package\Core\Domain\Validate\LaravelValidate;
+use Package\Application\Validation\LaravelValidate;
 use Package\Shared\Domain\Entity\Entity;
 use Package\Shared\Domain\Validation\ValidatorInterface;
 
