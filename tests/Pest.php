@@ -14,8 +14,11 @@ declare(strict_types = 1);
 */
 
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\LazilyRefreshDatabase::class)
     ->in('Feature');
+
+pest()->extend(Tests\UnitCase::class)
+    ->in('Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +46,11 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function validationException($class, array $data, array $default): void
 {
-    // ..
+    foreach ($data as $rs) {
+        $rs += $default;
+        expect(fn () => new $class(...$rs))
+            ->toThrow(Package\Shared\Domain\Notification\NotificationException::class);
+    }
 }

@@ -6,6 +6,7 @@ namespace Package\Core\Domain\Entity;
 
 use Package\Core\Domain\Factory\CategoryValidatorFactory;
 use Package\Shared\Domain\Entity\Entity;
+use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class CategoryEntity extends Entity
 {
@@ -29,8 +30,8 @@ class CategoryEntity extends Entity
         $this->isActive = false;
     }
 
-    protected function validate(): void
+    protected function getValidator(): ValidatorInterface
     {
-        CategoryValidatorFactory::create()->validate($this);
+        return CategoryValidatorFactory::create();
     }
 }

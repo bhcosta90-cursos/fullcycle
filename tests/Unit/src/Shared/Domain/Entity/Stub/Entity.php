@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Tests\Unit\src\Shared\Domain\Entity\Stub;
 
 use Package\Shared\Domain\Entity\{Entity as EntityAbstract, Traits\MagicMethodsTrait};
+use Package\Shared\Domain\Validation\ValidatorInterface;
 
 class Entity extends EntityAbstract
 {
@@ -16,5 +17,10 @@ class Entity extends EntityAbstract
         protected bool $isActive = true
     ) {
         //
+    }
+
+    protected function getValidator(): ?ValidatorInterface
+    {
+        return null;
     }
 }
