@@ -32,7 +32,3 @@ it('returns a paginated list of categories with meta information', function () {
             'first_page',
         ]);
 });
-
-it('a', function () {
-
-});
